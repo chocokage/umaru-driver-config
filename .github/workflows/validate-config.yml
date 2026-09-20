@@ -1,0 +1,25 @@
+name: Validate config
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # This file controls every installed copy of the app. A typo here does not
+      # crash anything -- clients silently fall back to their defaults -- so the
+      # only way to notice a broken edit is to check it.
+      - name: Validate config.json
+        run: python .github/scripts/validate_config.py
+
+      - name: Self-test the validator
+        run: python .github/scripts/test_validate_config.py
