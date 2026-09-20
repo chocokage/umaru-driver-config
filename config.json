@@ -1,0 +1,14 @@
+{
+  "minVersion": "1.0.0",
+  "iosStoreUrl": "",
+  "androidStoreUrl": "https://play.google.com/store/apps/details?id=com.vincenttu91.driver_exam",
+  "maintenanceMode": false,
+  "maintenanceMessage": "",
+  "featureFlags": {
+    "gamesEnabled": true,
+    "aiTutorEnabled": true,
+    "pushNotificationsEnabled": true,
+    "weeklySprintEnabled": true,
+    "diagnosticQuizEnabled": true
+  }
+}
