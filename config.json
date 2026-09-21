@@ -9,6 +9,7 @@
     "aiTutorEnabled": true,
     "pushNotificationsEnabled": true,
     "weeklySprintEnabled": true,
-    "diagnosticQuizEnabled": true
+    "diagnosticQuizEnabled": true,
+    "offlineGateEnabled": true
   }
 }

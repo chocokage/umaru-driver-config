@@ -38,6 +38,20 @@ whole app.
 | `pushNotificationsEnabled` | Scheduling of study reminders |
 | `weeklySprintEnabled` | The Weekly Sprint tile |
 | `diagnosticQuizEnabled` | The diagnostic quiz tile |
+| `offlineGateEnabled` | The "you must be online" blocking modal (see below) |
+
+### `offlineGateEnabled` — read this before touching it
+
+The app is ad-supported, so free users are required to be online; going offline
+raises a modal they **cannot dismiss**. Users who bought ad removal are exempt
+and can study offline.
+
+Setting this to `false` lets everyone use the app offline again. That is the
+right move if the gate turns out to be driving away installs or is misfiring on
+a particular carrier — it takes effect on the next launch, with no store review.
+
+It is a *revenue* switch as much as a feature switch: with it off, offline users
+see no ads at all.
 
 ## Runbook
 
@@ -50,6 +64,24 @@ an update button that leads to the old version.
 ```jsonc
 "minVersion": "1.1.0"
 ```
+
+On iOS this also needs `iosStoreUrl` filled in. While it is `""` the update
+button is disabled, so an out-of-date iOS user gets an undismissable modal with
+**no way out at all**. Set the App Store URL before you ever raise `minVersion`.
+
+### Roll out the ads release (v1.1.0)
+
+v1.0.0 ships with no ads and no in-app purchase. v1.1.0 adds both, and every
+v1.0.0 install has to be moved onto it or those users keep an ad-free build
+forever. Order matters:
+
+1. Submit v1.1.0 to both stores and wait for it to be **live and downloadable**,
+   not merely approved.
+2. Fill in `iosStoreUrl` if it is still empty.
+3. Only then set `"minVersion": "1.1.0"`.
+
+Doing step 3 first strands every existing user behind a modal pointing at a
+build that is not there yet.
 
 ### Take the app down during an incident
 
